@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
 		    current_cart.destroy
 		        render json: {order: @order, message: "your order is placed successfully"}
     end
-
+ 
     def destroy
     	#debugger
     	@order = Order.find(params[:id])
