@@ -1,7 +1,4 @@
 class LineItem < ApplicationRecord
-
-   
-
   belongs_to :cart
   belongs_to :food 
   belongs_to :order, optional: true

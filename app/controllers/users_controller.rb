@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
 
 	def create
-		debugger
 		@user = User.new(user_params)
 		if @user.save 
 			UserMailer.verification_email(@user).deliver_later

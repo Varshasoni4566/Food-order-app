@@ -11,6 +11,7 @@ def initialize(user)
       can :create, Order 
       can :index, Order
       can :destroy, Order
+      can :update, Order
       can :create, LineItem
       can :update, LineItem
       can :index, LineItem

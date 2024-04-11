@@ -2,7 +2,7 @@ class LineItemsController < ApplicationController
 
 	# before_action :set_line_item
 	before_action :authenticate_request
-	load_and_authorize_resource
+	# load_and_authorize_resource
 
 	def create
 		@food = Food.find_by(category_id: params[:category_id])
@@ -10,16 +10,15 @@ class LineItemsController < ApplicationController
             render json: { error: 'Food not found' }, status: :not_found
         return
         end
-
         @line_item = current_cart.line_items.find_or_initialize_by(food: @food)
 		  @line_item.quantity ||= 0
 		  @line_item.quantity += 1
-          authorize! :create, @line_item
-		  if @line_item.save
+          # authorize! :create, @line_item
+		if @line_item.save
 		    render json: { line_item: @line_item, message: 'Food was successfully added to cart' }, status: :created
-		  else
+		else
 		    render json: { error: 'Unable to add product to cart', errors: @line_item.errors.full_messages }, status: :unprocessable_entity
-		  end
+		end
  	end
 
  	def update
@@ -32,13 +31,22 @@ class LineItemsController < ApplicationController
 	 	end
  	end
 
- 	def index
-	    @line_items = current_cart.line_items.includes(:food)
+ 	def show
+	    @line_items = LineItem.find(params[:id])
 	    if @line_items.present?
 	        render json: { line_items: @line_items }, status: :ok
 	    else
 	    	render json: {message: "no items are here."}
 	    end
+    end
+
+    def index
+    	@line_item = LineItem.all    
+    	if @line_item.present?
+    		render json: @line_item  
+    	else 
+    		render json: {message: "not found"}
+    	end
     end
 
  	def destroy
