@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_053821) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_063416) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -50,6 +50,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_053821) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "foods", force: :cascade do |t|
     t.string "name"
     t.string "price"
@@ -75,6 +83,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_053821) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "total_price"
+    t.string "payment_intent_id"
+    t.integer "payment_method"
+    t.integer "customer_id"
+    t.integer "amount_cents"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,6 +105,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_053821) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0
   end
 
   add_foreign_key "carts", "users"
@@ -91,4 +113,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_053821) do
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "foods"
   add_foreign_key "line_items", "orders"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "payments", "orders"
 end
