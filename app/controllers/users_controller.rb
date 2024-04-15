@@ -7,8 +7,9 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save 
-			UserMailer.verification_email(@user).deliver_later
-			render json: { user: @user, otp: @user.otp }, status: :created
+			UserMailer.verification_email(@user).deliver_now
+			VerificationEmailMyuserJob.perform_in(1.minute, @user.id)
+			render json: { user: @user, otp: @user.otp}, status: :created
 		else
 			render json: {errors: @user.errors.full_messages}
 		end

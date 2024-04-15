@@ -34,9 +34,9 @@ class ApplicationController < ActionController::Base
         @current_cart ||= Cart.find_or_create_by(user_id: @current_user.id)
     end
 
-    def current_user
-   		@current_user ||= User.find_or_create_by(user_id: @current_user.id)
-    end
+    # def current_user
+   	# 	@current_user ||= User.find_or_create_by(user_id: @current_user.id)
+    # end
 
 
 	rescue_from CanCan::AccessDenied do |exception|

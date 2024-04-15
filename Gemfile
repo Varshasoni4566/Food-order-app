@@ -22,6 +22,7 @@ gem 'sassc-rails'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
+gem "sidekiq"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -29,7 +30,7 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 gem 'fcm'
-
+gem 'whenever', require: false
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
  gem 'rspec-rails'
@@ -51,6 +52,11 @@ gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 gem 'stripe'
+gem 'active_model_serializers'
+# gem "haml"
+# gem "jquery-rails"
+# gem "money-rails"
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
