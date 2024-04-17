@@ -8,7 +8,7 @@ has_many :line_items
 
   def self.ransackable_associations(auth_object = nil)
     ["category", "line_items"]
-  end
+  end 
 
 
 
