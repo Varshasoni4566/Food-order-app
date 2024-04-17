@@ -10,5 +10,5 @@ class LineItem < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["cart_id", "created_at", "food_id", "id", "id_value", "order_id", "quantity", "updated_at"]
-  end
+  end 
 end
