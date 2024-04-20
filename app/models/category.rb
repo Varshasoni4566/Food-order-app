@@ -9,4 +9,13 @@ class Category < ApplicationRecord
     def self.ransackable_associations(auth_object = nil)
     ["foods"]
   	end
+
+    def self.search(query)
+        categories = all
+    if query.present?
+      categories = categories.where("name LIKE :query ", query: "%#{query}%")
+    end
+
+    categories
+    end
 end

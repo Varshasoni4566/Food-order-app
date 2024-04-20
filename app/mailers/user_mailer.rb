@@ -1,8 +1,9 @@
 class UserMailer < ApplicationMailer
 
-    def verification_email(user)
+    def verification_email(user,order)
         @user = user
         @otp = @user.otp
+        @order = order
         mail(to: @user.email, subject: 'Email Verification')
     end
      

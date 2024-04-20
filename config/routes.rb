@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search/search'
+  get 'adminemails/create'
  
   get 'foods/index'
   get 'categories/index'
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
       post 'delay'
     end
   end
+  
+  get '/search', to: 'search#search'
 
 
 end

@@ -20,6 +20,15 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :user
   end
+
+  def self.search(query)
+    users = all
+    if query.present?
+      users = users.where("name LIKE :query OR email LIKE :query OR username LIKE :query", query: "%#{query}%")
+    end
+
+    users
+  end
   
 
   private

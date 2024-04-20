@@ -12,12 +12,25 @@ has_many :line_items
 
 
 
-  def self.search(query)
-    where("name LIKE ?", "%#{query}%")
-  end
+  # def self.search(query)
+  #   where("name LIKE ?", "%#{query}%")
+  # end
 
    def out_of_stock?
     !self.in_stock
   end
 
+  # def self.search(query)
+  #   where("name LIKE :query", query: "%#{query}%")
+  # end
+
+  def self.search(query)
+    foods = all
+    if query.present?
+      foods = foods.where("name LIKE :query OR price LIKE :query", query: "%#{query}%")
+    end
+    # foods = foods.where("name LIKE ?", "%#{name_query}%") if name_query.present?
+    # foods = foods.where("price <= ?", price_query.to_i) if price_query.present?
+    foods
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_063416) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_17_073656) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -79,15 +79,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_063416) do
     t.index ["order_id"], name: "index_line_items_on_order_id"
   end
 
+  create_table "notification_settings", force: :cascade do |t|
+    t.integer "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_notification_settings_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "total_price"
-    t.string "payment_intent_id"
-    t.integer "payment_method"
-    t.integer "customer_id"
-    t.integer "amount_cents"
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.datetime "delivery_date"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -96,6 +102,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_063416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.date "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -113,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_063416) do
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "foods"
   add_foreign_key "line_items", "orders"
-  add_foreign_key "orders", "customers"
+  add_foreign_key "notification_settings", "users"
+  add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
 end
