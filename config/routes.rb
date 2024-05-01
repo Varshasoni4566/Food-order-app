@@ -28,5 +28,8 @@ Rails.application.routes.draw do
   
   get '/search', to: 'search#search'
 
+  get 'reports/download_csv/:id', to: 'reports#download_csv', as: 'download_report'
+  get '/reports/download_pdf', to: 'reports#download_pdf'
+
 
 end

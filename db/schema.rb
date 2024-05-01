@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_17_073656) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_072016) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_17_073656) do
     t.float "total_price"
     t.datetime "delivery_date"
     t.integer "user_id"
+    t.boolean "convert"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -102,6 +103,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_17_073656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -128,4 +138,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_17_073656) do
   add_foreign_key "notification_settings", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
+  add_foreign_key "reports", "users"
 end

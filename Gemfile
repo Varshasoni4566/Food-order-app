@@ -10,31 +10,22 @@ gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
-gem "jwt"
-gem "bcrypt", '~> 3.1.7'
-gem 'rack-cors'
-gem 'activeadmin'
-gem 'devise'
-gem 'cancancan'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
-gem 'sassc-rails'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
-gem "sidekiq"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-gem 'fcm'
-gem 'whenever', require: false
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
- gem 'rspec-rails'
- gem "factory_bot_rails"
+ 
  # gem 'dotenv-rails', groups: [:development, :test]
 
 # Use Redis adapter to run Action Cable in production
@@ -51,8 +42,7 @@ gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-gem 'stripe'
-gem 'active_model_serializers'
+
 # gem "haml"
 # gem "jquery-rails"
 # gem "money-rails"
@@ -82,3 +72,21 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'prawn'
+gem 'prawn-table'
+gem "jwt"
+gem "bcrypt", '~> 3.1.7'
+gem 'rack-cors'
+gem 'activeadmin'
+gem 'devise'
+gem 'cancancan'
+gem 'sassc-rails'
+gem "sidekiq"
+gem 'letter_opener'
+gem 'fcm'
+gem 'whenever', require: false
+gem 'rspec-rails'
+gem "factory_bot_rails"
+gem 'stripe'
+gem 'active_model_serializers'
